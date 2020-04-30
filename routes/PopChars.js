@@ -1,36 +1,51 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const PopChar = require('../models/PopChar');
+const PopChar = require("../models/PopChar");
 
 // Get back all the posts
-router.get('/', async (req, res) => {
-    try{
-        const popChars = await PopChar.find({ethnicValue: "11111"});
-        res.json(popChars);
-    }catch(err){
-        res.json({message: err});
-    }
+router.get("/", async (req, res) => {
+  try {
+    const popChars = await PopChar.find();
+    res.json(popChars);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
-// submits post
-router.post('/', async (req, res) => {
-    const popChar = new PopChar({
-        ethnicLevel: req.body.ethnicLevel,
-        ethnicValue: req.body.ethnicValue,
-        birthCode: req.body.birthCode,
-        count: req.body.count,
-        percentage: req.body.percentage,
-        year: req.body.year
+router.get("/:ethnicValue", async (req, res) => {
+  try {
+    const popChars = await PopChar.find({
+      ethnicValue: req.params.ethnicValue,
     });
-
-    try{
-    const savedPopChar = await popChar.save();
-    res.json(savedPopChar);
-    }catch(err){
-        res.json({message: err});
-    }
-
+    res.json(popChars);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
+router.get("/:ethnicValue/total", async (req, res) => {
+  try {
+    const popChars = await PopChar.find({
+      ethnicValue: req.params.ethnicValue,
+      birthCode: "total",
+    });
+    res.json(popChars);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+router.get("/:ethnicValue/total/:year", async (req, res) => {
+  try {
+    const popChars = await PopChar.find({
+      ethnicValue: req.params.ethnicValue,
+      birthCode: "total",
+      year: req.params.year,
+    });
+    res.json(popChars);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 
 module.exports = router;

@@ -1,22 +1,19 @@
 const mongoose = require("mongoose");
 
 const ethnicHierarchySchema = mongoose.Schema({
-  ethnicLevel: {
+  Code: {
     type: String,
   },
-  ethnicValue: {
+  ParentCode: {
     type: String,
   },
-  birthCode: {
+  EthnicLevel: {
     type: String,
   },
-  count: {
+  EthnicValue: {
     type: String,
   },
-  percentage: {
-    type: String,
-  },
-  year: {
+  Active: {
     type: String,
   },
 });

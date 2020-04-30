@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 mongoose.set("bufferCommands", false);
 
 var mongoDB =
-  "mongodb+srv://overlandmike:Stelmos1Jish3fuu@cluster0-8tacg.mongodb.net/ethnicProfiles?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true";
+  "mongodb+srv://overlandmike:Stelmos1Jish3fuu@cluster0-8tacg.mongodb.net/ethnicProfiles?retryWrites=true&w=majority";
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var db = mongoose.connection;
@@ -40,4 +40,4 @@ db.once("open", function () {
 });
 
 //Listen
-app.listen(8080);
+app.listen(3002);

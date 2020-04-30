@@ -5,7 +5,9 @@ const ethnicHierarchy = require("../models/ethnicHierarchy");
 // Get back all the posts
 router.get("/ethnicvalues", async (req, res) => {
   try {
-    const ethnicHierarchies = await ethnicHierarchy.find();
+    const ethnicHierarchies = await ethnicHierarchy
+      .find({})
+      .select("EthnicValue");
     res.json(ethnicHierarchies);
   } catch (err) {
     res.json({ message: err });
